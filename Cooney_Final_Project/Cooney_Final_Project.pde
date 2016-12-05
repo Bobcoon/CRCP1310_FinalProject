@@ -1,29 +1,68 @@
-//Bobbie Cooney 
-//Final Project 
+/*Bobbie Cooney 
+Final Project 
+Portions of this code come from Chapter 6 & 7 of Processing Textbook By Ira Greenberg
+Portions of Game For Loops come from Daniel Shiffman's java script version of the snake game
+https://www.youtube.com/watch?v=AaGK-fj-BAM
+ArrayList<Integer> x = new ArrayList<Integer>(), y = new ArrayList<Integer>();
+//array to form the coordinate grid
+*/
 
 ArrayList<Integer> x = new ArrayList<Integer>(), y = new ArrayList<Integer>();
-//array for coordinates on grid 
 
-int w = 30; //width
-int h = 30; //height
+int w = 30;
+int h = 30;
 int ss = 20; //square size
-int dir= 2;
-int[] dx = {0,0,1,-1};
-int[] dy= {1,-1,0,0};
-void setup(){
+int direction = 2;
+int blueberryx = 12;
+int blueberryy = 10;
+int[] dx = {0, 0, 1, -1};
+int[] dy= {1, -1, 0, 0};
+boolean gameover= false;
+void setup() {
   size(500, 500);
   x.add(5);
   y.add(5);
-  
 }
-void draw(){
+void draw() {
   background(255);
-  //for loops to construct the grid
-  for(int i = 0; i< w; i++) line(i*ss, 0, i*ss, height);
-  for(int i = 0 ; i< h; i++) line(0, i*ss, width, i*ss);
-  for(int i = 0; i< x.size(); i++){
-    fill(0,255,0);
+  for (int i = 0; i< w; i++) line(i*ss, 0, i*ss, height);
+  for (int i = 0; i< h; i++) line(0, i*ss, width, i*ss);
+  for (int i = 0; i< x.size(); i++) {
+    fill(250,3,160);
     rect(x.get(i)*ss, y.get(i)*ss, ss, ss);
   }
-  
+  if (!gameover) {
+    fill(0, 0, 255);
+    rect(blueberryx*ss, blueberryy*ss, ss, ss);
+    if (frameCount %8==0) {
+      x.add(0, x.get(0) + dx[direction]);
+      y.add(0, y.get(0) + dy[direction]);
+      if(x.get(0) <0 || y.get(0) < 0 || x.get(0) >= w|| y.get(0)>=h ) gameover= true;
+      if (x.get(0) == blueberryx && y.get(0) == blueberryy) {
+        for(int i = 1; i< x.size(); i++) 
+        if(x.get(0)==x.get(i) && y.get(0)==y.get(i)) gameover = true;
+        blueberryx = (int) random(0, w);
+        blueberryy= (int) random(0, h);
+      } else {
+
+        x.remove(x.size() - 1);
+        y.remove(y.size() -1);
+      }
+    }
+  }else{
+    fill(255,0,0);
+    textSize(30);
+    text("GAME OVER!! Press Spacebar.", 40, 223);
+    if(keyPressed && key==' '){
+      x.clear();
+      y.clear();
+      x.add(5);
+      y.add(5);
+      gameover = false;
+  }
+}
+}
+void keyPressed() {
+  int newdirection = key == 'a' ? 0 : (key =='s' ? 1:(key == 'd' ? 2: (key=='f' ? 3 :-1)));
+  if ( newdirection != -1) direction = newdirection;
 }
