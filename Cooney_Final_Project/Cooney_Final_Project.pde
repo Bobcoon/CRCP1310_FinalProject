@@ -7,6 +7,9 @@ ArrayList<Integer> x = new ArrayList<Integer>(), y = new ArrayList<Integer>();
 //array to form the coordinate grid
 */
 
+//how do I change my code to make itwork in a class
+//how do I delete tabs
+
 ArrayList<Integer> x = new ArrayList<Integer>(), y = new ArrayList<Integer>();
 
 int w = 30;
