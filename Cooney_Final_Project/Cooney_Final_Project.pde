@@ -8,19 +8,21 @@ ArrayList<Integer> x = new ArrayList<Integer>(), y = new ArrayList<Integer>();
 */
 
 //how do I change my code to make itwork in a class
-//how do I delete tabs
+
 
 ArrayList<Integer> x = new ArrayList<Integer>(), y = new ArrayList<Integer>();
 
-int w = 30;
-int h = 30;
+int w = 30; //height 
+int h = 30; //width
 int ss = 20; //square size
 int direction = 2;
 int blueberryx = 12;
 int blueberryy = 10;
-int[] dx = {0, 0, 1, -1};
-int[] dy= {1, -1, 0, 0};
+int[] dx = {0, 0, 1, -1};//change in x
+int[] dy= {1, -1, 0, 0};//change in y
 boolean gameover= false;
+Snake S;
+Blueberry B;
 void setup() {
   size(500, 500);
   x.add(5);
